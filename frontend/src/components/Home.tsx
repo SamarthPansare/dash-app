@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Configuration for the base URL
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL || "http://localhost:5000";
 
 // Reusable AppCard component
 const AppCard = ({ title, description, path, previewUrl, onClick }) => {
