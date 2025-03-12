@@ -4,6 +4,23 @@ import { useNavigate } from 'react-router-dom';
 // Configuration for the base URL
 const BASE_URL = "http://localhost:5000";
 
+// Reusable AppCard component
+const AppCard = ({ title, description, path, previewUrl, onClick }) => {
+  return (
+    <div style={styles.appCard} onClick={onClick}>
+      <div style={styles.cardHeader}>
+        <h3 style={styles.appTitle}>{title}</h3>
+        <p style={styles.appDescription}>{description}</p>
+      </div>
+      <iframe
+        src={previewUrl}
+        style={styles.iframePreview}
+        title={`${title} Preview`}
+      />
+    </div>
+  );
+};
+
 const Home = () => {
   const navigate = useNavigate();
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -134,39 +151,27 @@ const Home = () => {
       </nav>
 
       <div style={styles.appGrid}>
-        <div style={styles.appCard} onClick={() => navigate('/open-oil-gas')}>
-          <div style={styles.cardHeader}>
-            <h3 style={styles.appTitle}>Oil & Gas Industry Dashboard</h3>
-            <p style={styles.appDescription}>Explore insights into the oil and gas industry.</p>
-          </div>
-          <iframe
-            src={`${BASE_URL}/open-oil-gas`}
-            style={styles.iframePreview}
-            title="OPEN Oil & Gas App Preview"
-          />
-        </div>
-        <div style={styles.appCard} onClick={() => navigate('/open-pngrb')}>
-          <div style={styles.cardHeader}>
-            <h3 style={styles.appTitle}>PNGRB Dashboard</h3>
-            <p style={styles.appDescription}>Monitor regulatory and infrastructure data.</p>
-          </div>
-          <iframe
-            src={`${BASE_URL}/open-pngrb`}
-            style={styles.iframePreview}
-            title="OPEN PNGRB App Preview"
-          />
-        </div>
-        <div style={styles.appCard} onClick={() => navigate('/open-pngrb-india')}>
-          <div style={styles.cardHeader}>
-            <h3 style={styles.appTitle}>PNGRB India Dashboard</h3>
-            <p style={styles.appDescription}>Track progress and performance metrics.</p>
-          </div>
-          <iframe
-            src={`${BASE_URL}/open-pngrb-india`}
-            style={styles.iframePreview}
-            title="OPEN PNGRB India App Preview"
-          />
-        </div>
+        <AppCard
+          title="Oil & Gas Industry Dashboard"
+          description="Explore insights into the oil and gas industry."
+          path="/open-oil-gas"
+          previewUrl={`${BASE_URL}/open-oil-gas`}
+          onClick={() => navigate('/open-oil-gas')}
+        />
+        <AppCard
+          title="PNGRB Dashboard"
+          description="Monitor regulatory and infrastructure data."
+          path="/open-pngrb"
+          previewUrl={`${BASE_URL}/open-pngrb`}
+          onClick={() => navigate('/open-pngrb')}
+        />
+        <AppCard
+          title="PNGRB India Dashboard"
+          description="Track progress and performance metrics."
+          path="/open-pngrb-india"
+          previewUrl={`${BASE_URL}/open-pngrb-india`}
+          onClick={() => navigate('/open-pngrb-india')}
+        />
       </div>
 
       {organisation && (
@@ -178,17 +183,14 @@ const Home = () => {
               </div>
               <div style={styles.appGrid}>
                 {group.apps.map((app, idx) => (
-                  <div key={idx} style={styles.appCard} onClick={() => navigate(app.path)}>
-                    <div style={styles.cardHeader}>
-                      <h3 style={styles.appTitle}>{app.title}</h3>
-                      <p style={styles.appDescription}>{app.description}</p>
-                    </div>
-                    <iframe
-                      src={app.previewUrl}
-                      style={styles.iframePreview}
-                      title={`${app.title} Preview`}
-                    />
-                  </div>
+                  <AppCard
+                    key={idx}
+                    title={app.title}
+                    description={app.description}
+                    path={app.path}
+                    previewUrl={app.previewUrl}
+                    onClick={() => navigate(app.path)}
+                  />
                 ))}
               </div>
             </React.Fragment>
@@ -199,6 +201,7 @@ const Home = () => {
   );
 };
 
+// Styles
 const styles = {
   container: {
     display: 'flex',

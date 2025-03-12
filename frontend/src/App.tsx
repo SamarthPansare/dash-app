@@ -7,6 +7,27 @@ import SignUp from './components/SignUp';
 // Configuration for the base URL
 const BASE_URL = "http://localhost:5000";
 
+// Reusable IframeRoute component
+const IframeRoute = ({ path, title }) => {
+  return (
+    <div style={styles.fullScreenWrapper}>
+      <nav style={styles.navbar}>
+        <h1 style={styles.logo}>Unified Dashboard</h1>
+        <div style={styles.navLinks}>
+          <button onClick={() => window.history.back()} style={styles.button}>Back</button>
+        </div>
+      </nav>
+      <div style={styles.iframeContainer}>
+        <iframe
+          src={`${BASE_URL}${path}`}
+          style={styles.fullScreenIframe}
+          title={title}
+        />
+      </div>
+    </div>
+  );
+};
+
 function App() {
   return (
     <Router>
@@ -16,314 +37,29 @@ function App() {
         <Route path="/signup" element={<SignUp onSignUp={(token) => localStorage.setItem('token', token)} />} />
 
         {/* Routes for OPEN folder apps */}
-        <Route
-          path="/open-oil-gas"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/open-oil-gas`}
-                  style={styles.fullScreenIframe}
-                  title="OPEN Oil & Gas App"
-                />
-              </div>
-            </div>
-          }
-        />
-        <Route
-          path="/open-pngrb"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/open-pngrb`}
-                  style={styles.fullScreenIframe}
-                  title="OPEN PNGRB App"
-                />
-              </div>
-            </div>
-          }
-        />
-        <Route
-          path="/open-pngrb-india"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/open-pngrb-india`}
-                  style={styles.fullScreenIframe}
-                  title="OPEN PNGRB India App"
-                />
-              </div>
-            </div>
-          }
-        />
+        <Route path="/open-oil-gas" element={<IframeRoute path="/open-oil-gas" title="OPEN Oil & Gas App" />} />
+        <Route path="/open-pngrb" element={<IframeRoute path="/open-pngrb" title="OPEN PNGRB App" />} />
+        <Route path="/open-pngrb-india" element={<IframeRoute path="/open-pngrb-india" title="OPEN PNGRB India App" />} />
 
         {/* Routes for BPCL apps */}
-        <Route
-          path="/bpcl"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/bpcl`}
-                  style={styles.fullScreenIframe}
-                  title="BPCL App"
-                />
-              </div>
-            </div>
-          }
-        />
+        <Route path="/bpcl" element={<IframeRoute path="/bpcl" title="BPCL App" />} />
 
         {/* Routes for HPCL apps */}
-        <Route
-          path="/hpcl"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/hpcl`}
-                  style={styles.fullScreenIframe}
-                  title="HPCL App"
-                />
-              </div>
-            </div>
-          }
-        />
+        <Route path="/hpcl" element={<IframeRoute path="/hpcl" title="HPCL App" />} />
 
         {/* Routes for IOCL apps */}
-        <Route
-          path="/iocl-cost"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/iocl-cost`}
-                  style={styles.fullScreenIframe}
-                  title="IOCL Cost App"
-                />
-              </div>
-            </div>
-          }
-        />
-        <Route
-          path="/iocl-terminals"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/iocl-terminals`}
-                  style={styles.fullScreenIframe}
-                  title="IOCL Terminals App"
-                />
-              </div>
-            </div>
-          }
-        />
+        <Route path="/iocl-cost" element={<IframeRoute path="/iocl-cost" title="IOCL Cost App" />} />
+        <Route path="/iocl-terminals" element={<IframeRoute path="/iocl-terminals" title="IOCL Terminals App" />} />
 
         {/* Routes for PNGRB apps */}
-        <Route
-          path="/pngrb-bpcl"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/pngrb-bpcl`}
-                  style={styles.fullScreenIframe}
-                  title="PNGRB BPCL App"
-                />
-              </div>
-            </div>
-          }
-        />
-        <Route
-          path="/pngrb-bpcl-123"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/pngrb-bpcl-123`}
-                  style={styles.fullScreenIframe}
-                  title="PNGRB BPCL 123 App"
-                />
-              </div>
-            </div>
-          }
-        />
-        <Route
-          path="/pngrb-cost"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/pngrb-cost`}
-                  style={styles.fullScreenIframe}
-                  title="PNGRB Cost App"
-                />
-              </div>
-            </div>
-          }
-        />
-        <Route
-          path="/pngrb-hpcl"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/pngrb-hpcl`}
-                  style={styles.fullScreenIframe}
-                  title="PNGRB HPCL App"
-                />
-              </div>
-            </div>
-          }
-        />
-        <Route
-          path="/pngrb-iocl"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/pngrb-iocl`}
-                  style={styles.fullScreenIframe}
-                  title="PNGRB IOCL App"
-                />
-              </div>
-            </div>
-          }
-        />
-        <Route
-          path="/pngrb-petroleum"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/pngrb-petroleum`}
-                  style={styles.fullScreenIframe}
-                  title="PNGRB Petroleum App"
-                />
-              </div>
-            </div>
-          }
-        />
-        <Route
-          path="/pngrb-terminals"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/pngrb-terminals`}
-                  style={styles.fullScreenIframe}
-                  title="PNGRB Terminals App"
-                />
-              </div>
-            </div>
-          }
-        />
-        <Route
-          path="/pngrb-transportation"
-          element={
-            <div style={styles.fullScreenWrapper}>
-              <nav style={styles.navbar}>
-                <h1 style={styles.logo}>Unified Dashboard</h1>
-                <div style={styles.navLinks}>
-                  <button onClick={() => window.history.back()} style={styles.button}>Back</button>
-                </div>
-              </nav>
-              <div style={styles.iframeContainer}>
-                <iframe
-                  src={`${BASE_URL}/pngrb-transportation`}
-                  style={styles.fullScreenIframe}
-                  title="PNGRB Transportation App"
-                />
-              </div>
-            </div>
-          }
-        />
+        <Route path="/pngrb-bpcl" element={<IframeRoute path="/pngrb-bpcl" title="PNGRB BPCL App" />} />
+        <Route path="/pngrb-bpcl-123" element={<IframeRoute path="/pngrb-bpcl-123" title="PNGRB BPCL 123 App" />} />
+        <Route path="/pngrb-cost" element={<IframeRoute path="/pngrb-cost" title="PNGRB Cost App" />} />
+        <Route path="/pngrb-hpcl" element={<IframeRoute path="/pngrb-hpcl" title="PNGRB HPCL App" />} />
+        <Route path="/pngrb-iocl" element={<IframeRoute path="/pngrb-iocl" title="PNGRB IOCL App" />} />
+        <Route path="/pngrb-petroleum" element={<IframeRoute path="/pngrb-petroleum" title="PNGRB Petroleum App" />} />
+        <Route path="/pngrb-terminals" element={<IframeRoute path="/pngrb-terminals" title="PNGRB Terminals App" />} />
+        <Route path="/pngrb-transportation" element={<IframeRoute path="/pngrb-transportation" title="PNGRB Transportation App" />} />
       </Routes>
     </Router>
   );
